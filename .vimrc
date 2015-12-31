@@ -30,6 +30,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'mileszs/ack.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'fatih/vim-go'
+Plugin 'elixir-lang/vim-elixir'
 
 call vundle#end()
 
