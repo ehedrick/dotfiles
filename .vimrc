@@ -14,7 +14,6 @@ Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'elixir-lang/vim-elixir'
 Plugin 'fatih/vim-go'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'kien/ctrlp.vim'
@@ -23,7 +22,9 @@ Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'shougo/neocomplete'
 Plugin 'skalnik/vim-vroom'
+Plugin 'szw/vim-tags'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-commentary'
@@ -48,6 +49,8 @@ set clipboard=unnamed
 set number
 set ruler
 set laststatus=2
+set number
+set relativenumber
 syntax on
 filetype on
 filetype indent on
@@ -87,6 +90,14 @@ let g:syntastic_check_on_wq = 0
 " autocomplete
 " this defaults to <C-x><C-o>
 autocmd FileType ruby compiler ruby
+
+" even more autocomplete!
+let g:neocomplete#enable_at_startup = 1
+
+" ctags
+set exrc
+set secure
+let g:vim_tags_auto_generate = 1
 
 " make mouse work. Helpful for changing partition sized
 set mouse=a
