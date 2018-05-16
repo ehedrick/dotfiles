@@ -13,13 +13,18 @@ Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'derekwyatt/vim-scala'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'fatih/vim-go'
+Plugin 'godlygeek/tabular'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -36,6 +41,7 @@ Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-ruby/vim-ruby'
+" Bundle 'wellle/tmux-complete.vim'
 
 call vundle#end()
 
@@ -67,6 +73,11 @@ syntax enable
 let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
+
+" folding
+set foldenable
+set foldmethod=indent
+set foldlevel=10
 
 " ctrl p
 let g:ctrlp_map = '<c-p>'
@@ -114,3 +125,12 @@ vmap <C-C> :w !pbcopy<CR><CR>
 
 " bye bye ESC
 inoremap jj <ESC>
+
+" silver surfer is faster than ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" distraction free mode
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!

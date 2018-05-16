@@ -1,11 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+# export ZSH=/Users/ehedrick/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="pure"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -52,51 +49,24 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 
 # User configuration
-# export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 plugins+=(zsh-completions)
 autoload -U compinit && compinit
 
-# copied from bash profile
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
+
 alias tag_it="ctags -R --languages=ruby --exclude=.git --exclude=log ."
 alias be="bundle exec"
 alias bi="bundle install --quiet"
 alias ber="be rspec"
 alias bec="be cucumber"
 alias gg="git log --graph --pretty=oneline --abbrev-commit"
-chruby ruby-2.0.0
+alias gbd="git branch --merged master --no-color | grep -v master | grep -v stable | xargs git branch -d" # delete all branches merged to master
 
-export PGDATA='/usr/local/var/postgres'
-export PGHOST=localhost
+chruby ruby-2.2.5
 
 # making go well... go
 export GOPATH=$HOME/go
@@ -107,8 +77,15 @@ if [ $? -eq 1 ]; then
   ssh-add
 fi
 
-eval "$(thefuck --alias)"
+if which brew >/dev/null; then
+  VIRTUALENVWRAPPER=$(brew --prefix)/bin/virtualenvwrapper.sh
+  if [ -x $VIRTUALENVWRAPPER ]; then
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/src
+    mkdir -p $WORKON_HOME
+    source $VIRTUALENVWRAPPER
+  fi
+fi
+. ~/.asdf/asdf.sh
 
-PATH=$PATH:/opt/phantomjs/bin
-
-eval "$(docker-machine env default)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
